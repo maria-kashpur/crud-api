@@ -1,5 +1,5 @@
 import path from "path";
-const ESLintPlugin = require("eslint-webpack-plugin");
+import ESLintPlugin from "eslint-webpack-plugin";
 
 module.exports = {
   entry: "./src/index",
