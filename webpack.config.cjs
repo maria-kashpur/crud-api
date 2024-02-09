@@ -1,8 +1,9 @@
-import path from "path";
-import ESLintPlugin from "eslint-webpack-plugin";
+/* eslint-disable @typescript-eslint/no-var-requires */
+const ESLintPlugin = require("eslint-webpack-plugin");
+const path = require("path");
 
 module.exports = {
-  entry: "./src/index",
+  entry: path.join(__dirname, "src", "index.ts"),
   target: "node",
   output: {
     path: path.join(__dirname, "dist"),
