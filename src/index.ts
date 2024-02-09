@@ -1,12 +1,11 @@
 import { createServer } from "http";
+import { HOST, PORT } from "./data/constants";
 
-const PORT = 3500;
-
-const server = createServer((_, res) => {
+const server = createServer((_req, res) => {
   res.write("ok");
   res.end();
 });
 
 server.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+  console.log(`Server running at http://${HOST}:${PORT}`);
 });
