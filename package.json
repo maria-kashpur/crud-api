@@ -7,10 +7,10 @@
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "test": "jest --silent",
-    "start:dev": "NODE_NO_WARNINGS=1 nodemon",
+    "start:dev": "nodemon",
     "start:prod": "webpack --mode production && node ./dist/index.js",
     "start:dev:multi": "nodemon --multi",
-    "start:prod:multi": "webpack --mode production && cross-env CRUD_API_MODE=cluster node ./dist/index.js"
+    "start:prod:multi": "webpack --mode production && node ./dist/index.js --multy"
   },
   "author": "",
   "license": "ISC",

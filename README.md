@@ -11,6 +11,9 @@ DELETE    /api/users/:id
 1. Clone the repository
 2. Install dependencies: npm install 
 
+# Environment Variables
+Make sure to set the following environment variables in a .env file:
+PORT: Port number for the server to listen on.
 
 # Usage
 1. npm run start:dev - Start the server in development mode with auto-reloading using
@@ -18,3 +21,4 @@ DELETE    /api/users/:id
 3. npm run start:dev:multi - To enable horizontal scaling, use the following command
 4. npm run start:prod:multi - Build and start the multi server in production mode using
 5. npm run test - Run tests to ensure the correctness of API endpoints
+
