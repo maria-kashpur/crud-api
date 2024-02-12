@@ -1,6 +1,6 @@
 import { User } from "../types/types";
-import users from "./../../public/users.json";
 import { v4 as uuidv4 } from "uuid";
+import { usersBase as users } from "./../data/users";
 
 export default class UserModel {
   static async getAll() {
