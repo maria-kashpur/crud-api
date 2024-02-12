@@ -34,6 +34,10 @@ const requestHandlePrime = async (req: IncomingMessage, res: Response) => {
 
     const childReq = request(options, callback);
 
+    childReq.on("response", (childRes) => {
+      res.statusCode = childRes.statusCode!;
+    });
+
     childReq.on("error", () =>
       createServerRes(res, StatusCodes.SERVER_ERROR, {
         message: "Error on the server side",
