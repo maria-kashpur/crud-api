@@ -1,3 +1,5 @@
+import { IncomingMessage, ServerResponse } from "http";
+
 export interface User {
   id: string;
   username: string;
@@ -17,3 +19,7 @@ export const enum StatusCodes {
 export const enum endpoints {
   users = "/api/users",
 }
+
+export type Response = ServerResponse<IncomingMessage> & {
+  req: IncomingMessage;
+};

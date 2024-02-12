@@ -1,22 +1,19 @@
 import { createServer } from "http";
-import { PORT, HOST } from "./data/constants";
-import { StatusCodes, endpoints } from "./types/types";
-import Users from "./controllers/usersController";
+import requestHandler from "./services/requestHandler";
+import { isMulty as isMulti } from "./data/constants";
+import { HOST, PORT } from "./data/constants";
+import { balancer } from "./services/balancer";
 
-export const server = createServer((req, res) => {
-  const { url } = req;
+const server = createServer(requestHandler);
 
-  const isUserEndpoint = url?.startsWith(endpoints.users);
+if (isMulti) {
+  balancer(server);
+} else {
+  server.listen(PORT, () => {
+    console.log(`Server started: http://${HOST}:${PORT}`);
+  });
+}
 
-  if (isUserEndpoint) {
-    Users.handle(req, res);
-  } else {
-    res.statusCode = StatusCodes.NOT_FOUND;
-    res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ message: "Endpoint not found" }));
-  }
-});
-
-server.listen(PORT, () => {
-  console.log(`Server started: http://${HOST}:${PORT}`);
+process.on("SIGINT", () => {
+  server.close(() => process.exit());
 });
