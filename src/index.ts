@@ -1,11 +1,22 @@
 import { createServer } from "http";
-import { HOST, PORT } from "./data/constants";
+import { PORT, HOST } from "./data/constants";
+import { StatusCodes, endpoints } from "./types/types";
+import Users from "./controllers/usersController";
 
-const server = createServer((_req, res) => {
-  res.write("ok");
-  res.end();
+export const server = createServer((req, res) => {
+  const { url } = req;
+
+  const isUserEndpoint = url?.startsWith(endpoints.users);
+
+  if (isUserEndpoint) {
+    Users.handle(req, res);
+  } else {
+    res.statusCode = StatusCodes.NOT_FOUND;
+    res.setHeader("Content-Type", "application/json");
+    res.end(JSON.stringify({ message: "Endpoint not found" }));
+  }
 });
 
 server.listen(PORT, () => {
-  console.log(`Server running at http://${HOST}:${PORT}`);
+  console.log(`Server started: http://${HOST}:${PORT}`);
 });

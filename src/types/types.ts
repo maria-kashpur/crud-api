@@ -13,3 +13,7 @@ export const enum StatusCodes {
   NOT_FOUND = 404,
   SERVER_ERROR = 500,
 }
+
+export const enum endpoints {
+  users = "/api/users",
+}
