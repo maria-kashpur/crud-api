@@ -7,9 +7,14 @@ GET       /api/users/:id
 PUT       /api/users/:id
 DELETE    /api/users/:id
 
+# Installation
+1. Clone the repository
+2. Install dependencies: npm install 
 
-Scripts: 
-"start:dev": "NODE_NO_WARNINGS=1 nodemon",
-"start:prod": "webpack --mode production && node ./dist/index.js",
-"start:dev:multi": "nodemon --multi",
-"start:prod:multi": "webpack --mode production && cross-env CRUD_API_MODE=cluster node ./dist/index.js"
+
+# Usage
+1. npm run start:dev - Start the server in development mode with auto-reloading using
+2. npm run start:prod - Build and start the server in production mode using
+3. npm run start:dev:multi - To enable horizontal scaling, use the following command
+4. npm run start:prod:multi - Build and start the multi server in production mode using
+5. npm run test - Run tests to ensure the correctness of API endpoints
