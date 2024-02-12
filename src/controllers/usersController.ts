@@ -5,6 +5,8 @@ import { validate as uuidValidate } from "uuid";
 import { User, endpoints, StatusCodes } from "../types/types";
 import parseBody from "../utils/parseBody";
 import createServerRes from "../utils/createServerRes";
+import cluster from "cluster";
+import { ServiceForUsersBase } from "../data/users";
 
 type Response = ServerResponse<IncomingMessage> & {
   req: IncomingMessage;
@@ -81,6 +83,9 @@ export default class UserController {
             message: "Not found endpoint",
           });
           break;
+      }
+      if (cluster.isWorker) {
+        process.send?.(ServiceForUsersBase.getUsers());
       }
     } catch (e) {
       console.log(`Server error: ${e}`);
