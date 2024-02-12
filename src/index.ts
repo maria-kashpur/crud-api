@@ -1,6 +1,6 @@
 import { createServer } from "http";
 import requestHandler from "./services/requestHandler";
-import { isMulty as isMulti } from "./data/constants";
+import { isMulti as isMulti } from "./data/constants";
 import { HOST, PORT } from "./data/constants";
 import { balancer } from "./services/balancer";
 

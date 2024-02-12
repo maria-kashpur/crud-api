@@ -7,4 +7,4 @@ export const HOST = "localhost";
 
 export const USER_WHITH_ID = /^\/api\/users\/[^\/]+$/;
 
-export const isMulty = process.argv.includes("--multi");
+export const isMulti = process.argv.includes("--multi");
