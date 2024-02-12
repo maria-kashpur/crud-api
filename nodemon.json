@@ -2,6 +2,9 @@
   "execMap": {
     "ts": "ts-node"
   },
+  "events": {
+    "restart": "clear"
+  },
   "ext": "ts",
   "watch": ["src"],
   "ignore": ["src/**/*.test.ts"],
