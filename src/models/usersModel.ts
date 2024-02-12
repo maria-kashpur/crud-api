@@ -39,6 +39,7 @@ export default class UserModel {
 
   static checkData(data: unknown) {
     if (typeof data !== "object") return false;
+    if (Array.isArray(data)) return false;
     if (
       !data ||
       !("age" in data) ||

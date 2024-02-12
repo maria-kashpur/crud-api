@@ -11,7 +11,6 @@ export const balancer = (server: Server) => {
   if (cluster.isPrimary) {
     cores.map((_, i) => {
       const worker = cluster.fork({ WORKER_PORT: PORT + i + 1 });
-      cluster.schedulingPolicy = cluster.SCHED_RR;
       worker.on("message", (message) => {
         ServiceForUsersBase.updateUsers(message);
         cores.map((_, i) => {
@@ -27,7 +26,7 @@ export const balancer = (server: Server) => {
       console.log(`Balancer #${process.pid} is listening port ${PORT}`);
     });
   } else if (cluster.isWorker) {
-    const workerPort = process.env.WORKER_PORT;
+    const workerPort = Number(process.env.WORKER_PORT);
     server.listen(workerPort, () => {
       console.log(
         `Worker started: http://${HOST}:${workerPort}. Pid: ${process.pid}`,

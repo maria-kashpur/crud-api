@@ -1,20 +1,25 @@
 import { IncomingMessage } from "http";
 
-export default async function parseBody(req: IncomingMessage) {
+export const parseBody = (req: IncomingMessage) => {
   return new Promise((resolve, reject) => {
-    try {
-      let body = "";
+    const data: Buffer[] = [];
 
-      req.on("data", (chunk: Uint8Array) => {
-        body += chunk;
-      });
+    req.on("data", (chunk) => {
+      data.push(chunk);
+    });
 
-      req.on("end", () => {
-        resolve(JSON.parse(body));
-      });
-    } catch (e) {
-      console.log(e);
-      reject(e);
-    }
+    req.on("end", () => {
+      try {
+        resolve(JSON.parse(Buffer.concat(data).toString()));
+      } catch (error) {
+        reject(error);
+      }
+    });
+
+    req.on("error", (error) => {
+      reject(error);
+    });
   });
-}
+};
+
+export default parseBody;

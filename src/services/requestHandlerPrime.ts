@@ -16,6 +16,7 @@ const requestHandlePrime = async (req: IncomingMessage, res: Response) => {
       method: method,
       headers: headers,
     };
+
     const callback = async (resp: IncomingMessage) => {
       const data: Buffer[] = [];
       resp.on("data", (chunk: Buffer) => {
